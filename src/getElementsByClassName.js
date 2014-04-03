@@ -5,5 +5,24 @@
 
 // But in stead we're going to implement it from scratch:
 var getElementsByClassName = function (className) {
-  // your code here
+	var resultElements = [];
+	var rootNode =  document.body;
+	var checkNodes = function(rootNode){
+		 // check Each sibling node
+		_.each(rootNode.childNodes,function(node){                      
+			if(node.classList && node.classList.contains(className)){
+				resultElements.push(node);
+			}
+		// check for Child Nodes	
+			if(node.hasChildNodes()){
+				
+				 checkNodes(node);
+			}
+		});
+
+	}
+	checkNodes(rootNode);
+	
+	return resultElements;
+
 };
